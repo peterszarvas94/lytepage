@@ -1,11 +1,20 @@
 # dev mode:
 
-templ:
-	templ generate --watch --proxy="http://localhost:8080/" --open-browser="false"
+dev/typescript:
+	cd theme/script && \
+	npm run dev
+
+dev/templ:
+	templ generate --watch --proxy="http://localhost:8080" --open-browser=false -v
+
+dev/server:
+	air -c .air.server.toml
+
+dev/assets:
+	air -c .air.assets.toml
 
 dev:
-	templ generate
-	air -c .air.toml
+	make -j4 dev/typescript dev/templ dev/server dev/assets
 
 # ssr mode:
 
@@ -16,11 +25,11 @@ build:
 ssr:
 	./bin/ssr
 	
-# ssg mode:
+# static mode:
 
 gen:
 	templ generate
 	go run ./cmd/gen
 
-ssg:
-	go run ./cmd/ssg
+static:
+	go run ./cmd/static

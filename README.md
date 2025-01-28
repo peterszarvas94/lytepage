@@ -18,7 +18,6 @@
 
 ### Develoment mode
 
-- `make templ`: start templ file generation in watch mode
 - `make dev`: start dev server with hot reload
 
 ### SSR (Server Side Rendering) mode
@@ -26,14 +25,14 @@
 - `make build`: build go binary
 - `make ssr`: start server
 
-### SSG (Static Site Generation) mode
+### SSG (Static Side Generation) mode
 
 - `make gen`: generate static files
 
 You can put these static files to any server. You can serve them with
 **lytepage** as well:
 
-- `make ssg`: start static file server
+- `make static`: start static file server
 
 ## Themes
 

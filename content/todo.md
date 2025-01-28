@@ -28,7 +28,7 @@ excerpt: "Way to prod"
 - [ ] seo things on frontmatter
 - [ ] error handling
 - [ ] accessibility
-- [ ] rewrite search.js to typesript
+- [x] rewrite search.js to typesript
 - [ ] organize packages
 
 ## 0.3
