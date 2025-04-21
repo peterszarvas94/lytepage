@@ -48,72 +48,90 @@ body {
   font-family: "Fira Sans", sans-serif;
 }
 
-header {
-  div {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 1rem;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-grow: 3;
+    gap: 2;
+    flex-wrap: wrap;
 
-    a.logo {
+    a[href="/"] {
       text-decoration: none;
+      flex-grow: 1;
       color: var(--logo-fg);
+      padding-right: 3rem;
+
       font-size: 2rem;
-      font-weight: 600;
+      text-wrap: nowrap;
     }
 
-    nav {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 1.5rem;
+    a[href="/docs"] {
+      background: var(--docs-bg);
+      color: var(--docs-fg);
+      font-size: 1.3rem;
+      padding: 0rem 0.5rem;
+      border-radius: 0.5rem;
+      height: fit-content;
 
-      a {
-        background: var(--docs-bg);
-        color: var(--docs-fg);
-        font-size: 1.3rem;
-        padding: 0rem 0.5rem;
-        border-radius: 0.5rem;
-        height: fit-content;
+      &:hover,
+      &:focus {
+        outline: 1px solid var(--docs-bg);
+        background: var(--docs-fg);
+        color: var(--docs-bg);
+      }
+    }
+  }
+  form {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    border: 1px solid var(--text);
+    border-radius: 0.5rem;
+    padding: 0 0.5rem;
+    flex-grow: 1;
 
-        &:hover,
-        &:focus {
-          outline: 1px solid var(--docs-bg);
-          background: var(--docs-fg);
-          color: var(--docs-bg);
-        }
+    input {
+      padding: 0.5rem 0;
+      border: none;
+      width: 100%;
+
+      &:focus {
+        outline: none;
       }
 
-      form {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-        border: 1px solid var(--text);
-        border-radius: 0.5rem;
-        padding: 0 0.5rem;
+      &::placeholder {
+        color: var(--text);
+      }
+    }
 
-        input {
-          padding: 0.5rem;
-          border: none;
-        }
+    &:has(input:focus-visible) {
+      outline: 1px solid var(--text);
+    }
 
-        button {
-          cursor: pointer;
+    button {
+      cursor: pointer;
 
-          svg {
-            height: 1.5rem;
-            width: 1.5rem;
-          }
-        }
+      svg {
+        height: 1.5rem;
+        width: 1.5rem;
       }
     }
   }
 }
 
-footer {
+.footer {
   height: 5rem;
   display: flex;
   justify-content: center;
@@ -121,6 +139,10 @@ footer {
 }
 
 .markdown-body {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+
   code {
     font-family: "Fira Code", monospace;
   }
@@ -131,16 +153,18 @@ footer {
   flex-direction: column;
   align-items: center;
   padding: 0 1rem;
-  min-height: calc(100dvh - 10rem);
+  min-height: calc(100dvh - 13.5rem);
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
 
   h1 {
     font-size: 2rem;
     font-weight: 200;
     padding: 2rem 0;
+    text-align: center;
+    text-wrap-style: balance;
   }
-}
-
-.index-page {
 }
 
 .post-page {
@@ -189,6 +213,8 @@ footer {
 
   .markdown-body {
     max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
     padding: 4rem 0;
 
     ul,
