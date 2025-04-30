@@ -1,4 +1,4 @@
-.PHONY: install zip
+.PHONY: install zip publish
 
 install:
 	go run ./install
