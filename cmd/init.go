@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"path/filepath"
 
+	"github.com/peterszarvas94/lytepage/constants"
 	"github.com/peterszarvas94/lytepage/utils"
 	"github.com/spf13/cobra"
 )
@@ -73,7 +74,7 @@ var initCmd = &cobra.Command{
 		// install deps
 		dependencies := []string{
 			"github.com/a-h/templ@v0.3.857",
-			"github.com/peterszarvas94/lytepage@v0.1.0",
+			fmt.Sprintf("github.com/peterszarvas94/lytepage@%s", constants.Version),
 		}
 
 		for _, dep := range dependencies {
