@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"os/exec"
 
 	"github.com/peterszarvas94/lytepage/constants"
 	"github.com/peterszarvas94/lytepage/utils"
@@ -16,24 +15,27 @@ func main() {
 		os.Exit(1)
 	}
 
-	command := exec.Command("git", "tag", constants.Version, "-m", constants.Version)
-	err = command.Run()
-	if err != nil {
-		fmt.Println("Error initializing:", err.Error())
+	if err := utils.Cmd("git", "diff", "--quiet"); err != nil {
+		fmt.Println("Uncommitted changes found. Commit before tagging.")
 		os.Exit(1)
 	}
 
-	command = exec.Command("git", "push")
-	err = command.Run()
-	if err != nil {
-		fmt.Println("Error initializing:", err.Error())
+	if err := utils.Cmd("git", "rev-parse", "--verify", "refs/tags/"+constants.Version); err == nil {
+		fmt.Printf("Tag %s already exists\n", constants.Version)
 		os.Exit(1)
 	}
 
-	command = exec.Command("git", "push", "--tags")
-	err = command.Run()
-	if err != nil {
-		fmt.Println("Error initializing:", err.Error())
+	if err := utils.Cmd("git", "tag", constants.Version, "-m", constants.Version); err != nil {
 		os.Exit(1)
 	}
+
+	if err := utils.Cmd("git", "push"); err != nil {
+		os.Exit(1)
+	}
+
+	if err := utils.Cmd("git", "push", "--tags"); err != nil {
+		os.Exit(1)
+	}
+
+	fmt.Printf("Version %s published successfully\n", constants.Version)
 }
