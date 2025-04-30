@@ -83,7 +83,7 @@ func tagBody(tag string, files []*fileutils.FileData) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("# %s", tag))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `theme/templates/tagPage.templ`, Line: 19, Col: 35}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/embed/theme/templates/tagPage.templ`, Line: 19, Col: 35}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {

@@ -55,7 +55,7 @@ func PostPage(post *fileutils.FileData) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(post.Matter.Title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `theme/templates/postPage.templ`, Line: 15, Col: 26}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/embed/theme/templates/postPage.templ`, Line: 15, Col: 26}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -68,7 +68,7 @@ func PostPage(post *fileutils.FileData) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(post.DateTime.Format(fmt.Sprintf("%s %s", config.DateLayout, config.TimeLayout)))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `theme/templates/postPage.templ`, Line: 16, Col: 91}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/embed/theme/templates/postPage.templ`, Line: 16, Col: 91}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -105,7 +105,7 @@ func PostPage(post *fileutils.FileData) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("# %s", tag))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `theme/templates/postPage.templ`, Line: 25, Col: 34}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/embed/theme/templates/postPage.templ`, Line: 25, Col: 34}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
