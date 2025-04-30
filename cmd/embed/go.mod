@@ -4,7 +4,7 @@ go 1.24.1
 
 require (
 	github.com/a-h/templ v0.3.857
-	github.com/peterszarvas94/lytepage v0.0.2
+	github.com/peterszarvas94/lytepage v0.1.0
 )
 
 require (
