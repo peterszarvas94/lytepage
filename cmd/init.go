@@ -36,7 +36,7 @@ var initCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		// go mod init
+		// init
 		command := exec.Command("go", "mod", "init", "scaffhold")
 		command.Dir = "."
 		err = command.Run()
@@ -87,6 +87,15 @@ var initCmd = &cobra.Command{
 			}
 		}
 
+		// generate
+		command = exec.Command("templ", "generate")
+		command.Dir = "."
+		err = command.Run()
+		if err != nil {
+			fmt.Printf("Error generating: %v\n", err.Error())
+			os.Exit(1)
+		}
+
 		// tidy
 		command = exec.Command("go", "mod", "tidy")
 		command.Dir = "."
@@ -96,14 +105,6 @@ var initCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		// generate
-		command = exec.Command("templ", "generate")
-		command.Dir = "."
-		err = command.Run()
-		if err != nil {
-			fmt.Printf("Error generating: %v\n", err.Error())
-			os.Exit(1)
-		}
 	},
 }
 
