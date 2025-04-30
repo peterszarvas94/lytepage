@@ -3,6 +3,5 @@
 install:
 	go run ./install
 
-
-zip:
-	go run ./zip
+publish:
+	go run ./publish

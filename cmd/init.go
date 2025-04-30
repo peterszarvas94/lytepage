@@ -24,16 +24,19 @@ var initCmd = &cobra.Command{
 		if targetDir == "" || targetDir == "." {
 			targetDir = "./"
 		}
+
 		err := utils.UnzipFromEmbed(embedZip, targetDir)
 		if err != nil {
 			fmt.Println(err.Error())
 			os.Exit(1)
 		}
 
-		err = os.Chdir(targetDir)
-		if err != nil {
-			fmt.Println(err.Error())
-			os.Exit(1)
+		if targetDir != "./" {
+			err = os.Chdir(targetDir)
+			if err != nil {
+				fmt.Println(err.Error())
+				os.Exit(1)
+			}
 		}
 
 		// init
@@ -51,6 +54,7 @@ var initCmd = &cobra.Command{
 			fmt.Println(err.Error())
 			os.Exit(1)
 		}
+		fmt.Printf("Name flag is %s\n", name)
 
 		targetDirName := targetDir
 		if targetDirName == "./" {
