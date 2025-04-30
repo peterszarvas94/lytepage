@@ -6,9 +6,9 @@ import (
 	"path"
 
 	"github.com/a-h/templ"
-	"github.com/peterszarvas94/lt2/custom"
-	"github.com/peterszarvas94/lt2/fileutils"
-	"github.com/peterszarvas94/lt2/pages"
+	"github.com/peterszarvas94/lytepage/custom"
+	"github.com/peterszarvas94/lytepage/fileutils"
+	"github.com/peterszarvas94/lytepage/pages"
 )
 
 type contentHandler struct{}

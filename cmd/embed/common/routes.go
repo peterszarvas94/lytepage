@@ -1,10 +1,10 @@
 package common
 
 import (
-	"lt2-test/theme/templates"
+	"lytepage-test/theme/templates"
 
 	"github.com/a-h/templ"
-	"github.com/peterszarvas94/lt2/fileutils"
+	"github.com/peterszarvas94/lytepage/fileutils"
 )
 
 var CustomRoutes = map[string]templ.Component{

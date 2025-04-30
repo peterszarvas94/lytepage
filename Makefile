@@ -1,3 +1,5 @@
+.PHONY: install
+
 install:
-	go run make/install.go
+	go run ./install
 

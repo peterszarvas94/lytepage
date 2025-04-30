@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/peterszarvas94/lt2/cmd"
+	"github.com/peterszarvas94/lytepage/cmd"
 )
 
 func main() {

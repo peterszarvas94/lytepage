@@ -1,4 +1,4 @@
-module github.com/peterszarvas94/lt2
+module github.com/peterszarvas94/lytepage
 
 go 1.24.1
 

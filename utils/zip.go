@@ -18,34 +18,45 @@ func ZipFolder(source, target string, exclude []string) error {
 	w := zip.NewWriter(out)
 	defer w.Close()
 
+	excludeSet := make(map[string]struct{})
+	for _, e := range exclude {
+		excludeSet[e] = struct{}{}
+	}
+
 	return filepath.Walk(source, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
-		for _, ex := range exclude {
-			if info.IsDir() && info.Name() == ex {
-				return filepath.SkipDir
-			}
-			if !info.IsDir() && filepath.Base(filepath.Dir(path)) == ex {
-				return nil
-			}
-		}
-		if info.IsDir() {
-			return nil
-		}
+
 		rel, err := filepath.Rel(source, path)
 		if err != nil {
 			return err
 		}
+
+		for ex := range excludeSet {
+			if rel == ex || filepath.Base(rel) == ex {
+				if info.IsDir() {
+					return filepath.SkipDir
+				}
+				return nil
+			}
+		}
+
+		if info.IsDir() {
+			return nil
+		}
+
 		f, err := w.Create(rel)
 		if err != nil {
 			return err
 		}
+
 		in, err := os.Open(path)
 		if err != nil {
 			return err
 		}
 		defer in.Close()
+
 		_, err = io.Copy(f, in)
 		return err
 	})

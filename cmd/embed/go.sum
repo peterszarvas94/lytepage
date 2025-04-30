@@ -6,8 +6,8 @@ github.com/adrg/frontmatter v0.2.0 h1:/DgnNe82o03riBd1S+ZDjd43wAmC6W35q67NHeLkPd
 github.com/adrg/frontmatter v0.2.0/go.mod h1:93rQCj3z3ZlwyxxpQioRKC1wDLto4aXHrbqIsnH9wmE=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
-github.com/peterszarvas94/lt2 v0.0.2 h1:iA8SfCVzYGrhpNboWMArho6mFPPA9lgHDA2RTPMXE1Y=
-github.com/peterszarvas94/lt2 v0.0.2/go.mod h1:SVVxGSDgK7uzhsDySgFcBoX6R4nfU5aNTasHPNBRQPU=
+github.com/peterszarvas94/lytepage v0.0.2 h1:iA8SfCVzYGrhpNboWMArho6mFPPA9lgHDA2RTPMXE1Y=
+github.com/peterszarvas94/lytepage v0.0.2/go.mod h1:SVVxGSDgK7uzhsDySgFcBoX6R4nfU5aNTasHPNBRQPU=
 github.com/yuin/goldmark v1.7.10 h1:S+LrtBjRmqMac2UdtB6yyCEJm+UILZ2fefI4p7o0QpI=
 github.com/yuin/goldmark v1.7.10/go.mod h1:ip/1k0VRfGynBgxOz0yCqHrbZXhcjxyuS66Brc7iBKg=
 github.com/yuin/goldmark-emoji v1.0.6 h1:QWfF2FYaXwL74tfGOW5izeiZepUDroDJfWubQI9HTHs=

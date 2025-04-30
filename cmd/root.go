@@ -11,8 +11,8 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "lt2",
-	Short: "",
+	Use:   "lytepage",
+	Short: "lytepage - static site generator",
 }
 
 //go:embed embed.zip

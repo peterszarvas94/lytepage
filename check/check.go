@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"slices"
 
-	"github.com/peterszarvas94/lt2/config"
-	"github.com/peterszarvas94/lt2/custom"
-	"github.com/peterszarvas94/lt2/errors"
-	"github.com/peterszarvas94/lt2/fileutils"
+	"github.com/peterszarvas94/lytepage/config"
+	"github.com/peterszarvas94/lytepage/custom"
+	"github.com/peterszarvas94/lytepage/errors"
+	"github.com/peterszarvas94/lytepage/fileutils"
 )
 
 var protectedRoutes = []string{"/404", "/static", "/tag", "/category"}

@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"lt2-test/common"
+	"lytepage-test/common"
 	"os"
 
-	"github.com/peterszarvas94/lt2/custom"
-	"github.com/peterszarvas94/lt2/pages"
-	"github.com/peterszarvas94/lt2/ssr"
+	"github.com/peterszarvas94/lytepage/custom"
+	"github.com/peterszarvas94/lytepage/pages"
+	"github.com/peterszarvas94/lytepage/ssr"
 )
 
 func main() {

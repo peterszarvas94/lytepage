@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	"github.com/a-h/templ"
-	"github.com/peterszarvas94/lt2/fileutils"
+	"github.com/peterszarvas94/lytepage/fileutils"
 )
 
 type Pages interface {

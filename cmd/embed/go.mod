@@ -1,10 +1,10 @@
-module lt2-test
+module lytepage-test
 
 go 1.24.1
 
 require (
 	github.com/a-h/templ v0.3.857
-	github.com/peterszarvas94/lt2 v0.0.2
+	github.com/peterszarvas94/lytepage v0.0.2
 )
 
 require (

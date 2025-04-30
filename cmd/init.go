@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/peterszarvas94/lt2/utils"
+	"github.com/peterszarvas94/lytepage/utils"
 	"github.com/spf13/cobra"
 )
 

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"path"
 
-	_ "github.com/peterszarvas94/lt2/check"
+	_ "github.com/peterszarvas94/lytepage/check"
 )
 
 func RunServer() error {

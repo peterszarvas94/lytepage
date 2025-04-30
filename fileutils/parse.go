@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/adrg/frontmatter"
-	"github.com/peterszarvas94/lt2/config"
+	"github.com/peterszarvas94/lytepage/config"
 	"github.com/yuin/goldmark"
 	emoji "github.com/yuin/goldmark-emoji"
 	"github.com/yuin/goldmark/extension"
