@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"lytepage-test/common"
 	"os"
+	"scaffhold/common"
 
 	"github.com/peterszarvas94/lytepage/custom"
 	"github.com/peterszarvas94/lytepage/pages"

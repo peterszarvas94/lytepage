@@ -1,7 +1,7 @@
 package common
 
 import (
-	"lytepage-test/theme/templates"
+	"scaffhold/theme/templates"
 
 	"github.com/a-h/templ"
 	"github.com/peterszarvas94/lytepage/fileutils"

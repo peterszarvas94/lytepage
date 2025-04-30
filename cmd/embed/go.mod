@@ -1,4 +1,4 @@
-module lytepage-test
+module scaffhold
 
 go 1.24.1
 
