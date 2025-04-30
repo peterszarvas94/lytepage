@@ -1,0 +1,25 @@
+package templates
+
+import (
+	"fmt"
+	"github.com/peterszarvas94/lt2/fileutils"
+	"lt2-test/theme/templates/components"
+)
+
+templ TagPage(tag string, files []*fileutils.FileData) {
+	@components.Head()
+	@tagBody(tag, files)
+}
+
+templ tagBody(tag string, files []*fileutils.FileData) {
+	<body>
+		@components.Header()
+		<main class="page tag-page">
+			<h1>
+				<div>{ fmt.Sprintf("# %s", tag) }</div>
+			</h1>
+			@components.ArticleList(files, false)
+		</main>
+		@components.Footer()
+	</body>
+}

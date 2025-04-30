@@ -1,0 +1,26 @@
+package templates
+
+import (
+	"github.com/peterszarvas94/lt2/fileutils"
+	"lt2-test/theme/templates/components"
+	"lt2-test/config"
+)
+
+templ SearchPage(files []*fileutils.FileData) {
+	@components.Head() {
+		<script src="https://cdn.jsdelivr.net/npm/minisearch@7.1.0/dist/umd/index.min.js"></script>
+		<script src="/static/search.js" type="module" defer></script>
+	}
+	@searchBody(files)
+}
+
+templ searchBody(files []*fileutils.FileData) {
+	<body>
+		@components.Header()
+		<main class="page index-page">
+			<h1>{ config.IndexTitle }</h1>
+			@components.ArticleList(files, true)
+		</main>
+		@components.Footer()
+	</body>
+}

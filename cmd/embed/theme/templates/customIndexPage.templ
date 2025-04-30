@@ -1,0 +1,29 @@
+package templates
+
+import (
+	"github.com/peterszarvas94/lt2/fileutils"
+	"lt2-test/theme/templates/components"
+	"lt2-test/config"
+)
+
+import ()
+
+templ CustomIndexPage(post *fileutils.FileData) {
+	@components.Head()
+	@customIndexBody(post)
+}
+
+templ customIndexBody(post *fileutils.FileData) {
+	<body>
+		@components.Header()
+		<main class="page index-page">
+			<h1>{ config.IndexTitle }</h1>
+			<article class="markdown-body">
+				if post != nil {
+					@fileutils.HtmlString(post.Html)
+				}
+			</article>
+		</main>
+		@components.Footer()
+	</body>
+}

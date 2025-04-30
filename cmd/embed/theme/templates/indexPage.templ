@@ -1,0 +1,11 @@
+package templates
+
+import (
+	"github.com/peterszarvas94/lt2/fileutils"
+	"fmt"
+)
+
+// custom index page is used, this file is only for fulfilling the interface
+templ IndexPage(files []*fileutils.FileData) {
+	<div>{ fmt.Sprintf("We have %d files", len(files)) }</div>
+}

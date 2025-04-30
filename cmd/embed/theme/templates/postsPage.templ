@@ -1,0 +1,22 @@
+package templates
+
+import (
+	"github.com/peterszarvas94/lt2/fileutils"
+	"lt2-test/theme/templates/components"
+)
+
+templ PostsPage(files []*fileutils.FileData) {
+	@components.Head()
+	@postsBody(files)
+}
+
+templ postsBody(files []*fileutils.FileData) {
+	<body>
+		@components.Header()
+		<main class="page posts-page">
+			<h1>Documentation</h1>
+			@components.ArticleList(files, false)
+		</main>
+		@components.Footer()
+	</body>
+}

@@ -1,0 +1,21 @@
+package templates
+
+import (
+	"github.com/peterszarvas94/lt2/fileutils"
+	"lt2-test/theme/templates/components"
+)
+
+templ CategoryPage(category string, files []*fileutils.FileData) {
+	@components.Head()
+	<body>
+		@components.Header()
+		<main class="page category-page">
+			<h1>
+				@components.CategoryIcon()
+				<div>{ category }</div>
+			</h1>
+			@components.ArticleList(files, false)
+		</main>
+		@components.Footer()
+	</body>
+}

@@ -1,0 +1,27 @@
+package components 
+
+import "github.com/peterszarvas94/lt2/fileutils"
+
+templ ArticleList(files []*fileutils.FileData, hidden bool) {
+	<ul class="article-list">
+		for _, file:= range files {
+			if file.Matter.Hidden != true {
+				<li class={ templ.KV("hidden", hidden) }>
+					<a href={ templ.SafeURL(file.Fileroute) }>
+						<article>
+							<h2>
+								{ file.Matter.Title }
+							</h2>
+							<div>
+								{ file.Matter.Excerpt }
+							</div>
+						</article>
+						<div>
+							@ChevronRightIcon()
+						</div>
+					</a>
+				</li>
+			}
+		}
+	</ul>
+}
