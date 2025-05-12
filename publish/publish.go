@@ -60,12 +60,10 @@ func main() {
 		}
 
 		if strings.Contains(line, "replace github.com/peterszarvas94/lytepage") && !strings.HasPrefix(line, "// ") {
-			fmt.Printf("Replace   : %s\n", line)
 			newContent.WriteString("// ")
 			newContent.WriteString(line)
 			fmt.Printf("Commended out replace directive in file: %s\n", modFilePath)
 		} else {
-			fmt.Printf("Line is ok: %s\n", line)
 			newContent.WriteString(line)
 			newContent.WriteString("\n")
 		}
