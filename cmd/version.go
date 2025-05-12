@@ -9,8 +9,9 @@ import (
 
 // versionCmd represents the version command
 var versionCmd = &cobra.Command{
-	Use:   "version",
-	Short: "lytepage version",
+	Use:     "version",
+	Aliases: []string{"v"},
+	Short:   "lytepage version",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("lytepage")
 		fmt.Println(version.Version)

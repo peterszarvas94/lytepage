@@ -11,9 +11,10 @@ import (
 )
 
 var initCmd = &cobra.Command{
-	Use:   "init [folder]? [--name name]?",
-	Short: "Initialize a new project at the given folder (default is pwd)",
-	Args:  cobra.RangeArgs(0, 1),
+	Use:     "init [folder]? [--name name]?",
+	Aliases: []string{"i"},
+	Short:   "Initialize a new project at the given folder (default is pwd)",
+	Args:    cobra.RangeArgs(0, 1),
 	Run: func(cmd *cobra.Command, args []string) {
 		var folder string
 		if len(args) > 0 {
@@ -45,7 +46,7 @@ var initCmd = &cobra.Command{
 
 			projectName = filepath.Base(pwd)
 		} else {
-			projectName = folder
+			projectName = filepath.Base(folder)
 		}
 
 		fmt.Printf("Project name: %s\n", projectName)
