@@ -18,9 +18,7 @@ func main() {
 
 	// checking tag
 	ok, err := utils.RemoteTagExists(version)
-	if err != nil {
-		fmt.Printf("Error checking tag %s: %s\n", version, err.Error())
-	}
+	utils.CheckError(err, "Can not get remote tags")
 	if !ok {
 		fmt.Printf("Tag does not exists yet: %s \n", version)
 	} else {
@@ -30,9 +28,7 @@ func main() {
 
 	// check git status
 	has, err := utils.HasUncomittedChanges()
-	if err != nil {
-		fmt.Printf("Error checking uncommitted changes %s: %s\n", version, err.Error())
-	}
+	utils.CheckError(err, "Error checking uncommitted changes")
 	if has {
 		fmt.Println("You have uncomitted changes")
 		os.Exit(1)
@@ -44,15 +40,11 @@ func main() {
 	// - replacing lytepage version
 	// - removing "replace" directives
 
-	folder := "scaffhold"
-
-	modFilePath := filepath.Join(folder, "go.mod")
+	modFilePath := filepath.Join("scaffhold", "go.mod")
 
 	modFile, err := os.Open(modFilePath)
-	if err != nil {
-		fmt.Printf("No modfile found in: %s\n", folder)
-		os.Exit(1)
-	}
+	utils.CheckError(err, "No modfile found")
+
 	defer modFile.Close()
 
 	var newContent strings.Builder
@@ -77,53 +69,33 @@ func main() {
 		newContent.WriteString("\n")
 	}
 
-	if err := scanner.Err(); err != nil {
-		fmt.Printf("Error reading modfile: %s\n", err.Error())
-		os.Exit(1)
-	}
+	err = scanner.Err()
+	utils.CheckError(err, "Error reading modfile")
 
 	err = os.WriteFile(modFilePath, []byte(newContent.String()), 0644)
-	if err != nil {
-		fmt.Printf("Error writing modfile: %s\n", err.Error())
-		os.Exit(1)
-	}
+	utils.CheckError(err, "Error writing modfile")
 
 	// git stuff
 	err = utils.Cmd("git", "add", ".")
-	if err != nil {
-		fmt.Printf("Error with \"git add .\": %s\n", err.Error())
-		os.Exit(1)
-	}
+	utils.CheckError(err, "Error staging files")
 
 	fmt.Println("Staged files")
 
 	err = utils.Cmd("git", "commit", "-m", fmt.Sprintf("publish: %s", version))
-	if err != nil {
-		fmt.Printf("Error with \"git commit\": %s\n", err.Error())
-		os.Exit(1)
-	}
+	utils.CheckError(err, "Error committing files")
 
 	fmt.Println("Commited files")
 
 	err = utils.Cmd("git", "push")
-	if err != nil {
-		fmt.Printf("Error with \"git push\": %s\n", err.Error())
-		os.Exit(1)
-	}
+	utils.CheckError(err, "Error pushing")
 
 	fmt.Println("Pushed files")
 
 	err = utils.Cmd("git", "tag", version, "-m", version)
-	if err != nil {
-		fmt.Printf("Error with \"git tag\": %s\n", err.Error())
-		os.Exit(1)
-	}
+	utils.CheckError(err, "Error tagging")
 
 	err = utils.Cmd("git", "push", "--tags")
-	if err != nil {
-		fmt.Printf("Error with \"git push --tags\": %s\n", err.Error())
-		os.Exit(1)
-	}
+	utils.CheckError(err, "Error pushing tags")
 
 	fmt.Println("Pushed tags")
 
@@ -142,22 +114,14 @@ func main() {
 		newContent.WriteString("\n")
 	}
 
-	if err := scanner.Err(); err != nil {
-		fmt.Printf("Error reading mod file: %s\n", err.Error())
-		os.Exit(1)
-	}
+	err = scanner.Err()
+	utils.CheckError(err, "Error opening modfile")
 
 	err = os.WriteFile(modFilePath, []byte(newContent.String()), 0644)
-	if err != nil {
-		fmt.Printf("Error writing mod file: %s\n", err.Error())
-		os.Exit(1)
-	}
+	utils.CheckError(err, "Error closing modfile")
 
 	err = utils.Cmd("go", "mod", "tidy")
-	if err != nil {
-		fmt.Printf("Error with \"go mod tidy\": %s\n", err.Error())
-		os.Exit(1)
-	}
+	utils.CheckError(err, "Error tidying")
 
-	fmt.Printf("Tidied folder: %s\n", folder)
+	fmt.Printf("Tidied")
 }
