@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/peterszarvas94/lytepage/constants"
+	"github.com/peterszarvas94/lytepage/pkg/version"
 	"github.com/spf13/cobra"
 )
 
@@ -13,7 +13,7 @@ var versionCmd = &cobra.Command{
 	Short: "lytepage version",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("lytepage")
-		fmt.Println(constants.Version)
+		fmt.Println(version.Version)
 	},
 }
 

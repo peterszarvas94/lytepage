@@ -6,8 +6,8 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/peterszarvas94/lytepage/constants"
-	"github.com/peterszarvas94/lytepage/utils"
+	"github.com/peterszarvas94/lytepage/pkg/utils"
+	"github.com/peterszarvas94/lytepage/pkg/version"
 	"github.com/spf13/cobra"
 )
 
@@ -76,9 +76,10 @@ var initCmd = &cobra.Command{
 		}
 
 		// install deps
+
 		dependencies := []string{
 			"github.com/a-h/templ@v0.3.857",
-			fmt.Sprintf("github.com/peterszarvas94/lytepage@%s", constants.Version),
+			fmt.Sprintf("github.com/peterszarvas94/lytepage@%s", version.Version),
 		}
 
 		for _, dep := range dependencies {
@@ -89,6 +90,14 @@ var initCmd = &cobra.Command{
 				fmt.Printf("Error installing %s: %v\n", dep, err.Error())
 				os.Exit(1)
 			}
+		}
+
+		// git
+
+		err = utils.Cmd("git", "init")
+		if err != nil {
+			fmt.Println(err.Error())
+			os.Exit(1)
 		}
 
 		// generate
