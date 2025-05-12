@@ -45,8 +45,6 @@ func main() {
 	modFile, err := os.Open(modFilePath)
 	utils.CheckError(err, "No modfile found")
 
-	defer modFile.Close()
-
 	var newContent strings.Builder
 	scanner := bufio.NewScanner(modFile)
 
@@ -79,6 +77,11 @@ func main() {
 	err = os.WriteFile(modFilePath, []byte(newContent.String()), 0644)
 	utils.CheckError(err, "Error writing modfile")
 
+	err = modFile.Close()
+	utils.CheckError(err, "Error closing modfile")
+
+	fmt.Println("go.mod file has been updated and synchronized.")
+
 	// git stuff
 	err = utils.Cmd("git", "add", ".")
 	utils.CheckError(err, "Error staging files")
@@ -103,8 +106,12 @@ func main() {
 
 	fmt.Println("Pushed tags")
 
-	// add "replace" to template modfile
+	modFile, err = os.Open(modFilePath)
+	utils.CheckError(err, "Error reopening modfile")
+	defer modFile.Close()
+
 	newContent.Reset()
+	scanner = bufio.NewScanner(modFile)
 
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -122,6 +129,9 @@ func main() {
 	utils.CheckError(err, "Error opening modfile")
 
 	err = os.WriteFile(modFilePath, []byte(newContent.String()), 0644)
+	utils.CheckError(err, "Error writing modfile")
+
+	err = modFile.Close()
 	utils.CheckError(err, "Error closing modfile")
 
 	err = utils.Cmd("go", "mod", "tidy")
