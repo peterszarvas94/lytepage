@@ -135,5 +135,5 @@ func main() {
 	err = utils.Cmd("go", "mod", "tidy")
 	utils.CheckError(err, "Error tidying")
 
-	fmt.Printf("Tidied")
+	fmt.Println("Tidied")
 }
