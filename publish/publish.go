@@ -44,7 +44,8 @@ func main() {
 	// - replacing lytepage version
 	// - removing "replace" directives
 
-	folder := "template"
+	folder := "scaffhold"
+
 	modFilePath := filepath.Join(folder, "go.mod")
 
 	modFile, err := os.Open(modFilePath)

@@ -29,6 +29,10 @@ func ReplaceAllString(dir, originalStr, newStr string) error {
 
 		newContent := bytes.ReplaceAll(content, []byte(originalStr), []byte(newStr))
 
-		return os.WriteFile(path, newContent, 0644)
+		if !bytes.Equal(content, newContent) {
+			return os.WriteFile(path, newContent, 0644)
+		}
+
+		return nil
 	})
 }

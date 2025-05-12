@@ -1,7 +1,4 @@
-.PHONY: install zip publish
-
-install:
-	go run ./install
+.PHONY: publish
 
 publish:
 	go run ./publish

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"scaffhold/common"
@@ -12,6 +13,9 @@ import (
 )
 
 func main() {
+	noserve := flag.Bool("no-serve", false, "Do not start the server, only generate")
+	flag.Parse()
+
 	pages.RegisterPages(common.Pages)
 
 	custom.RegisterCustomRoutes(common.CustomRoutes)
@@ -22,10 +26,13 @@ func main() {
 		os.Exit(1)
 	}
 
+	if *noserve {
+		os.Exit(0)
+	}
+
 	err = static.RunServer()
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
 	}
-
 }

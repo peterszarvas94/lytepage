@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"path/filepath"
 
 	"github.com/peterszarvas94/lytepage/pkg/utils"
@@ -16,108 +15,100 @@ var initCmd = &cobra.Command{
 	Short: "Initialize a new project at the given folder (default is pwd)",
 	Args:  cobra.RangeArgs(0, 1),
 	Run: func(cmd *cobra.Command, args []string) {
-		var targetDir string
+		var folder string
 		if len(args) > 0 {
-			targetDir = args[0]
+			folder = args[0]
 		}
 
-		if targetDir == "" || targetDir == "." {
-			targetDir = "./"
+		if folder == "" || folder == "." {
+			folder = "./"
 		}
 
-		err := utils.UnzipFromEmbed(embedZip, targetDir)
-		if err != nil {
-			fmt.Println(err.Error())
-			os.Exit(1)
+		fmt.Printf("Target dir is: %s\n", folder)
+
+		targetDirFullPath, err := filepath.Abs(folder)
+		utils.CheckError(err, "Can not get target directory full path")
+
+		fmt.Printf("Target dir full path is: %s\n", targetDirFullPath)
+
+		// get project name
+
+		nameFlag, err := cmd.Flags().GetString("name")
+		utils.CheckError(err, "Can not parse flag \"name\"")
+
+		var projectName string
+		if nameFlag != "" {
+			projectName = nameFlag
+		} else if folder == "./" {
+			pwd, err := os.Getwd()
+			utils.CheckError(err, "Can not get pwd")
+
+			projectName = filepath.Base(pwd)
+		} else {
+			projectName = folder
 		}
 
-		if targetDir != "./" {
-			err = os.Chdir(targetDir)
-			if err != nil {
-				fmt.Println(err.Error())
-				os.Exit(1)
-			}
-		}
+		fmt.Printf("Project name: %s\n", projectName)
 
-		// init
-		command := exec.Command("go", "mod", "init", "scaffhold")
-		command.Dir = "."
-		err = command.Run()
-		if err != nil {
-			fmt.Println("Error initializing:", err.Error())
-			os.Exit(1)
-		}
+		tmp, err := os.MkdirTemp("", "lytepage-template")
+		utils.CheckError(err, "Error creating temp dir")
+
+		fmt.Printf("Temp dir created: %s\n", tmp)
+
+		// clone repo
+
+		err = utils.Cmd("git", "clone", "https://github.com/peterszarvas94/lytepage.git", tmp)
+		utils.CheckError(err, "Can not clone repo")
+
+		err = os.Chdir(tmp)
+		utils.CheckError(err, "Can change directory to tmp")
+
+		// checkout version
+
+		_, err = utils.CmdWithOutput("git", "checkout", version.Version)
+		utils.CheckError(err, "Can checkout version")
+
+		fmt.Printf("Checked out version: %s\n", version.Version)
+
+		err = utils.CopyDir(filepath.Join(tmp, "scaffhold"), targetDirFullPath)
+		utils.CheckError(err, "Can not copy dir")
 
 		// rename
-		name, err := cmd.Flags().GetString("name")
-		if err != nil {
-			fmt.Println(err.Error())
-			os.Exit(1)
-		}
-		fmt.Printf("Name flag is %s\n", name)
 
-		targetDirName := targetDir
-		if targetDirName == "./" {
-			pwd, err := os.Getwd()
-			if err != nil {
-				fmt.Println(err.Error())
-			}
-			targetDirName = filepath.Base(pwd)
-		}
+		err = utils.ReplaceAllString(targetDirFullPath, "scaffhold", projectName)
+		utils.CheckError(err, "Error replacing strings")
 
-		if name == "" {
-			name = targetDirName
-		}
+		fmt.Printf("Renamed %s to %s\n", "scaffhold", projectName)
 
-		err = utils.ReplaceAllString(".", "scaffhold", name)
-		if err != nil {
-			fmt.Printf("Error replacing %s with %s in dir %s: %s\n", "scaffhold", name, targetDir, err.Error())
-			os.Exit(1)
-		}
+		// templ
 
-		// install deps
+		err = utils.Cmd("go", "install", "github.com/a-h/templ/cmd/templ@v0.3.865")
+		utils.CheckError(err, "Error installing templ cli")
 
-		dependencies := []string{
-			"github.com/a-h/templ@v0.3.857",
-			fmt.Sprintf("github.com/peterszarvas94/lytepage@%s", version.Version),
-		}
+		// cd
 
-		for _, dep := range dependencies {
-			command := exec.Command("go", "get", "-u", dep)
-			command.Dir = "."
-			err = command.Run()
-			if err != nil {
-				fmt.Printf("Error installing %s: %v\n", dep, err.Error())
-				os.Exit(1)
-			}
-		}
+		err = os.Chdir(targetDirFullPath)
+		utils.CheckError(err, "Error changing directory")
 
 		// git
 
 		err = utils.Cmd("git", "init")
-		if err != nil {
-			fmt.Println(err.Error())
-			os.Exit(1)
-		}
-
-		// generate
-		command = exec.Command("templ", "generate")
-		command.Dir = "."
-		err = command.Run()
-		if err != nil {
-			fmt.Printf("Error generating: %v\n", err.Error())
-			os.Exit(1)
-		}
+		utils.CheckError(err, "Error initializing git")
 
 		// tidy
-		command = exec.Command("go", "mod", "tidy")
-		command.Dir = "."
-		err = command.Run()
-		if err != nil {
-			fmt.Printf("Error tidying: %v\n", err.Error())
-			os.Exit(1)
-		}
 
+		err = utils.Cmd("go", "mod", "tidy")
+		utils.CheckError(err, "Error tidying")
+
+		// vendor
+
+		err = utils.Cmd("go", "mod", "vendor")
+		utils.CheckError(err, "Error vendoring")
+
+		// generate
+
+		err = utils.Cmd("templ", "generate")
+		utils.CheckError(err, "Error generating with templ")
 	},
 }
 

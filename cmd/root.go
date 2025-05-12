@@ -15,9 +15,6 @@ var rootCmd = &cobra.Command{
 	Short: "lytepage - static site generator",
 }
 
-//go:embed embed.zip
-var embedZip []byte
-
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
