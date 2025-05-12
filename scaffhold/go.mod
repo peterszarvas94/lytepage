@@ -4,7 +4,7 @@ go 1.24.1
 
 require (
 	github.com/a-h/templ v0.3.857
-	github.com/peterszarvas94/lytepage v0.2.0
+	github.com/peterszarvas94/lytepage v0.2.6
 )
 
 require (
@@ -15,4 +15,4 @@ require (
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )
 
-replace github.com/peterszarvas94/lytepage => ../../lytepage
+// replace github.com/peterszarvas94/lytepage => ../../lytepage
