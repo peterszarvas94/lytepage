@@ -1,7 +1,4 @@
----
-title: "index"
-hidden: true
----
+# lytepage
 
 ## 1. Install
 
