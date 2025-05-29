@@ -3,7 +3,7 @@
 ## 1. Install
 
 ```shell
-go get github.com/peterszarvas94/lytepage@latest
+go install github.com/peterszarvas94/lytepage@latest
 ```
 
 ## 1. Initialize a new project

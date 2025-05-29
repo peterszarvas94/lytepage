@@ -15,4 +15,4 @@ require (
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )
 
-// replace github.com/peterszarvas94/lytepage => ../../lytepage
+replace github.com/peterszarvas94/lytepage => ../../lytepage
