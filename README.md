@@ -1,5 +1,9 @@
 # lytepage
 
+The documentation at https://lytepage.peterszarvas.hu is built from
+`scaffhold/` by the root Dockerfile and served by Caddy on port 8080.
+Coolify on `hub` deploys the `main` branch through the shared Forgejo bridge.
+
 ## 1. Install
 
 ```shell
