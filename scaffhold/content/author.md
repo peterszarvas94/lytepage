@@ -27,6 +27,5 @@ website, see below.
 
 - [website](https://peterszarvas.hu/)
 - [github](https://github.com/peterszarvas94/)
-- [phone](tel:+36202746444)
 - [email](mailto:contact@peterszarvas.hu)
 - [linkedin](https://www.linkedin.com/in/peterszarvas94/)
