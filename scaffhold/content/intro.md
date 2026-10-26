@@ -76,8 +76,8 @@ type (
 
 ### Default theme
 
-The default theme used for the [lytepage](https://lytepage.peterszarvas.hu)
-site, is included in this repo, under `theme` folder.
+The default theme used for the Lytepage example site is included in this repo
+under the `theme` folder.
 
 ### Switching themes
 
@@ -212,8 +212,7 @@ var Routes = &routeMap{
 }
 ```
 
-E.g. the landing page of [lytepage](https://lytepage.peterszarvas.hu) site is a
-custom route.
+For example, the landing page of the Lytepage example site is a custom route.
 
 ## Search
 
